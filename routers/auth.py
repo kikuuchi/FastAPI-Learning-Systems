@@ -7,6 +7,7 @@ from jose import JWTError, jwt
 import os
 
 import cruds.auth as auth_crud
+import schemas.auth as auth_schema
 
 router = APIRouter()
 
