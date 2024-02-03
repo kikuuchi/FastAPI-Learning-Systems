@@ -53,9 +53,10 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
         raise HTTPException(status_code=401, detail=f'メールアドレスまたはパスワードが違います。')
     return create_tokens(user.id)
 
-@router.post("/me")
-async def me():
-    pass
+# ログインユーザ取得API
+@router.get("/me", response_model=auth_schema.loginUser)
+async def me(login_user: auth_schema.loginUser = Depends(get_current_user)):
+    return login_user
 
 @router.post("/logout")
 async def logout():
